@@ -21,6 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', include('music.urls')),
 
-
-    #add url(r'^music/', admin.site.urls),
+    # url(r'^music/', admin.site.urls) / test,
 ]
