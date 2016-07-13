@@ -70,6 +70,10 @@ TEMPLATES = [
     },
 ]
 
+
+ # context generated , static , template works ,  view return json respoonse
+
+
 WSGI_APPLICATION = 'website.wsgi.application'
 
 

@@ -1,19 +1,28 @@
-from django.shortcuts import render
-from django.http import  HttpResponse
-from .models import Album
-# Create your views here.
-
+from .models import Album,Song
+from  django.shortcuts import  render , get_object_or_404
 def index (request) :
-    albums = Album.objects.all()
-    html = "<h1>Welcome to Music Album Page</h1>"
-    for album in albums :
-        url = '/music/'+str(album.id)
-        html+=  '<a href="'+url+'">'+album.album_title+' By : '+ album.artist +'</a> <br>'
-    return HttpResponse(html)
+    all_albums = Album.objects.all()
+    context = {'albums' : all_albums}
+    return render(request,'music/index.html',context)
 
 
 
 def detail(request,album_id):
+    album =  get_object_or_404(Album,pk = album_id)
+    context = {'album': album}
+    return render(request,'music/detail.html',context)
 
-    html = ""
-    return HttpResponse("<h2> Detail of Album Id : "+str(album_id)+"</h2>")
+def favorite(request,album_id) :
+    album = get_object_or_404(Album, pk=album_id)
+
+    try:
+        song = album.song_set.get(pk = request.POST['song'])
+    except (KeyError , Song.DoesNotExist ):
+        context = {'album': album , 'error_message':"You didn't correct song",}
+        return render(request,'music/error.html',context)
+
+    else:
+        song.is_favorite  = True
+        song.save()
+        context = {'album': album,}
+        return render(request, 'music/detail.html', context)

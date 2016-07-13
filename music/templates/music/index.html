@@ -1,0 +1,14 @@
+
+
+<h1>Welcome To The Music Album List </h1>
+{% if albums %}
+<ul>
+    {% for album in albums %}
+    <li><a href="{% url 'music:detail' album.id %}"> {{album.album_title}} by {{album.artist}}</a> </li>
+    {% endfor %}
+</ul>
+
+{% else %}
+    <h2> No Album found </h2>
+
+{% endif %}
