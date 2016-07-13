@@ -21,8 +21,7 @@ def favorite(request,album_id) :
         context = {'album': album , 'error_message':"You didn't correct song",}
         return render(request,'music/error.html',context)
 
-    else:
-        song.is_favorite  = True
-        song.save()
-        context = {'album': album,}
-        return render(request, 'music/detail.html', context)
+    song.is_favorite  = True
+    song.save()
+    context = {'album': album,}
+    return render(request, 'music/detail.html', context)
