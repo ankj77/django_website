@@ -6,10 +6,14 @@ app_name = 'music'
 
 urlpatterns = [
 
+
+
 # /music
      url(r'^$',views.IndexView.as_view(),name='index'),
 
-# /music/34/
+     url(r'^register/$', views.UserFormView.as_view(), name='user-registration'),
+
+     # /music/34/
 
      url(r'^(?P<pk>[0-9]+)/$' ,views.DetailView.as_view(),name='detail'),
 
@@ -20,7 +24,7 @@ urlpatterns = [
 
 # /music/album/update
 
-     url(r'^album/(?P<pk>[0-9]+)/$',views.AlbumUpdate .as_view(),name='album-update'),
+     url(r'^album/(?P<pk>[0-9]+)/$',views.AlbumUpdate.as_view(),name='album-update'),
 
 
 # /music/album/2/delete
